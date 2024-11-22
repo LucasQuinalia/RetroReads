@@ -263,6 +263,10 @@ public class Account extends AppCompatActivity {
         String userId = mAuth.getCurrentUser().getUid();
 
         // Referências aos campos
+        EditText nameField = findViewById(R.id.name_field);
+        EditText cpfField = findViewById(R.id.cpf_field);
+        String name = nameField.getText().toString().trim();
+        String cpfOrCnpj = cpfField.getText().toString().trim();
         EditText phoneNumberField = findViewById(R.id.phone_number_field);
         EditText streetField = findViewById(R.id.street_field);
         EditText addressNumberField = findViewById(R.id.address_number_field);
@@ -293,6 +297,8 @@ public class Account extends AppCompatActivity {
 
         // Cria o objeto de dados do usuário
         Map<String, Object> user = new HashMap<>();
+        user.put("name", name);
+        user.put("cpfOrCnpj", cpfOrCnpj);
         user.put("phoneNumber", phoneNumber);
         user.put("street", street.isEmpty() ? null : street);
         user.put("addressNumber", addressNumber.isEmpty() ? null : addressNumber);
@@ -301,20 +307,35 @@ public class Account extends AppCompatActivity {
         user.put("cep", cep.isEmpty() ? null : cep);
         user.put("state", state.isEmpty() ? null : state);
         user.put("city", city.isEmpty() ? null : city);
+        user.put("finances", 0);
 
         //verifies if an image was selected
         if (imageUri != null) {
-            uploadImageToFirebase(imageUri, user, userId); // Chama o método de upload de imagem
+            uploadImageToFirebase(imageUri, user, userId);
         } else {
-            db.collection("users").document(userId).set(user)
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(this, "User successfully updated!", Toast.LENGTH_SHORT).show();
-                        finishProgressBar();
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Error saving data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                        finishProgressBar();
-                    });
+            // Recupera a imagem atual do Firestore
+            db.collection("users").document(userId).get().addOnSuccessListener(document -> {
+                if (document.exists()) {
+                    String currentImageUrl = document.getString("imageUrl");
+                    if (currentImageUrl != null) {
+                        user.put("imageUrl", currentImageUrl); // Mantém a URL atual da imagem
+                    }
+                }
+
+                // Atualiza os dados do usuário
+                db.collection("users").document(userId).set(user)
+                        .addOnSuccessListener(aVoid -> {
+                            Toast.makeText(this, "User successfully updated!", Toast.LENGTH_SHORT).show();
+                            finishProgressBar();
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(this, "Error saving data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            finishProgressBar();
+                        });
+            }).addOnFailureListener(e -> {
+                Toast.makeText(this, "Error retrieving current image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                finishProgressBar();
+            });
         }
     }
 
