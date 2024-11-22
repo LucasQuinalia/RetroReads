@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Base.Theme.RetroReads" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="buttonStyle">@style/CustomButtonStyle</item>
+        <item name="bottomNavigationStyle">@style/CustomItemStyle</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/white</item>
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textColorHighlight">@color/light_green</item>
+        <item name="textInputStyle">@style/TextInputLayoutAppearance</item>
+        <item name="colorControlActivated">@color/green</item>
+    </style>
+
+    <style name="CustomButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@null</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="CustomItemStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemRippleColor">@android:color/transparent</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="TextInputLayoutAppearance">
+        <item name="android:textColorHint">@color/gray</item>
+    </style>
+</resources>

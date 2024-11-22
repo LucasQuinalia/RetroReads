@@ -1,0 +1,124 @@
+<resources>
+    <string name="app_name">RetroReads</string>
+
+    <string name="login">Login</string>
+    <string name="log_out">Log out</string>
+    <string name="save_changes">Save changes</string>
+    <string name="register">Register</string>
+    <string name="delete_account">Delete account</string>
+    <string name="user_pic">Profile picture</string>
+    <string name="user_data">User data</string>
+    <string name="name">Name/Company name</string>
+    <string name="name_hint">Type here</string>
+    <string name="cpf">CPF/CNPJ</string>
+    <string name="cpf_hint">Type here</string>
+    <string name="phone_number">Phone number</string>
+    <string name="phone_number_hint">(00) 00000-0000</string>
+    <string name="address">Address</string>
+    <string name="street">Street</string>
+    <string name="street_hint">Street where you are located</string>
+    <string name="address_number">Address number</string>
+    <string name="address_number_hint">Number of your address</string>
+    <string name="complement">Complement</string>
+    <string name="complement_hint">Apartment, block, A, B...</string>
+    <string name="district">District</string>
+    <string name="district_hint">District where you are located</string>
+    <string name="cep">CEP</string>
+    <string name="cep_hint">00000-000</string>
+    <string name="state">State</string>
+    <string name="state_hint">UF</string>
+    <string name="city">City</string>
+    <string name="city_hint">City where you are located</string>
+    <string name="account_data">Account data</string>
+    <string name="email">E-mail</string>
+    <string name="email_hint">Account e-mail</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Account password</string>
+    <string name="repeat_password">Confirm password</string>
+    <string name="repeat_password_hint">Confirm account password</string>
+
+    <string name="empty">Empty</string>
+
+    <string name="catalog">Catalog</string>
+
+    <string name="for_sale">For sale</string>
+
+    <string name="shelf">Shelf</string>
+
+    <string name="interests">Interests</string>
+
+    <string name="finances">Finances</string>
+
+    <string name="add_book">Add new book</string>
+    <string name="edit_book">Edit book details</string>
+    <string name="book_cover">Book cover</string>
+    <string name="book_title">Title</string>
+    <string name="book_title_hint">Book title</string>
+    <string name="book_author">Author</string>
+    <string name="book_author_hint">The name of the author</string>
+    <string name="book_publisher">Publisher</string>
+    <string name="book_publisher_hint">Who published this book</string>
+    <string name="book_release_date">Release date</string>
+    <string name="book_release_date_hint">dd/mm/yyyy</string>
+    <string name="book_genre">Genre</string>
+    <string-array name="book_genre_options">
+        <item>Fiction</item>
+        <item>Non-Fiction</item>
+        <item>Fantasy</item>
+        <item>Philosophy</item>
+        <item>Economics</item>
+        <item>Business</item>
+        <item>Personal Development</item>
+        <item>Historical</item>
+    </string-array>
+
+    <string name="book_page_number">Number of pages</string>
+    <string name="book_page_number_hint">How many pages the book has</string>
+    <string name="book_isbn">ISBN</string>
+    <string name="book_isbn_hint">000-0-00-000000-0</string>
+    <string name="book_description">Description</string>
+    <string name="book_description_hint">What the book is about</string>
+    <string name="book_reading_status">Reading status</string>
+    <string name="book_want_to_read">Want to read</string>
+    <string name="book_currently_reading">Currently reading</string>
+    <string name="book_already_read">Already read</string>
+    <string name="book_want_to_sell">Want to sell</string>
+    <string name="book_star_rate">Stars</string>
+    <string name="book_star_rate_hint">0-5</string>
+    <string name="book_price">Price</string>
+    <string name="book_price_hint">How much it cost</string>
+    <string name="book_quantity">Quantity</string>
+    <string name="book_quantity_hint">How many copies you have</string>
+
+    <string name="save_book">Save book</string>
+
+    <string name="fiction">Fiction</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="philosophy">Philosophy</string>
+    <string name="economics">Economics</string>
+    <string name="business">Business</string>
+    <string name="personal_development">Personal development</string>
+    <string name="historical">Historical</string>
+
+    <string name="interest_button">Interested!</string>
+    <string name="delete_interest_button">Delete interest</string>
+    <string name="interested_people"> are interested</string>
+
+    <string name="stock_value">Stock value</string>
+    <string name="cash_flow">Current cash flow</string>
+    <string name="value_hint">Enter here a value</string>
+    <string name="update_cash_flow">Update cash flow</string>
+
+    <string name="success_message_interest">Interest successfully registered!</string>
+    <string name="owner_contact_info">Owner contact info:</string>
+    <string name="owner_name">Name: </string>
+    <string name="owner_phone_number">Phone number: </string>
+
+    <string name="delete_message_interest">Are you sure?</string>
+    <string name="delete_message_interest_text">If you confirm this action, the book will no longer be in your interest list:</string>
+    <string name="delete_message_book_text">If you confirm this action, the book will no longer be in your shelf:</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="search">Search...</string>
+</resources>

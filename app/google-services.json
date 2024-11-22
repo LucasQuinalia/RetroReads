@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "366193113068",
+    "project_id": "retro-reads",
+    "storage_bucket": "retro-reads.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:366193113068:android:9976053a085e93860ff2c9",
+        "android_client_info": {
+          "package_name": "com.example.retroreads"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx5eV6zZIfFEMnCnOPGc9McAtZz7PsA0s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

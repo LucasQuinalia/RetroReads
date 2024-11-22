@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomSpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:dropDownVerticalOffset">5dp</item>
+        <item name="android:dropDownHorizontalOffset">5dp</item>
+        <item name="android:dropDownWidth">200dp</item>
+        <item name="android:popupBackground">@drawable/spinner_background</item>
+    </style>
+</resources>

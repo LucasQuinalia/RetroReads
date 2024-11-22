@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_catalog"
+        android:icon="@drawable/catalog"
+        android:title="" />
+    <item
+        android:id="@+id/nav_interests"
+        android:icon="@drawable/interests"
+        android:title="" />
+    <item
+        android:id="@+id/nav_shelf"
+        android:icon="@drawable/shelf"
+        android:title="" />
+    <item
+        android:id="@+id/nav_for_sale"
+        android:icon="@drawable/for_sale"
+        android:title="" />
+    <item
+        android:id="@+id/nav_finances"
+        android:icon="@drawable/finances"
+        android:title="" />
+</menu>
