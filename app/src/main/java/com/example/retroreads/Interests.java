@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -203,5 +204,17 @@ public class Interests extends AppCompatActivity {
 
     private void deleteBook(String bookId) {
 
+    }
+
+    public void openSearch(View view) {
+        // Obtendo o texto do EditText
+        EditText searchBar = findViewById(R.id.search_bar);
+        String searchText = searchBar.getText().toString().trim();
+
+        // Criando o Intent e passando o texto como extra
+        Intent myIntent = new Intent(getApplicationContext(), SearchBook.class);
+        myIntent.putExtra("search_query", searchText); // Envia o texto para a próxima Activity
+        startActivity(myIntent);
+        overridePendingTransition(0, 0);
     }
 }

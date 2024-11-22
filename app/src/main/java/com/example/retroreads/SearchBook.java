@@ -1,8 +1,11 @@
 package com.example.retroreads;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,43 +14,39 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForSale extends AppCompatActivity {
+public class SearchBook extends AppCompatActivity {
 
-    private RecyclerView for_sale_RecyclerView;
+    private RecyclerView bookRecyclerView;
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private BookAdapter bookAdapter;
-    private List<Book> bookList;
     private ImageView accountIcon;
+    private FirebaseStorage storage;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FirebaseApp.initializeApp(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_for_sale);
+        setContentView(R.layout.activity_search_book);
 
         //setting up user interface
         getWindow().setStatusBarColor(getResources().getColor(android.R.color.white));
@@ -57,28 +56,28 @@ public class ForSale extends AppCompatActivity {
         finishProgressBar();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.nav_for_sale);
+        bottomNavigationView.setSelectedItemId(R.id.nav_catalog);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.nav_catalog) {
-                    Intent intent = new Intent(ForSale.this, Catalog.class);
+                if (item.getItemId() == R.id.nav_for_sale) {
+                    Intent intent = new Intent(SearchBook.this, ForSale.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (item.getItemId() == R.id.nav_shelf) {
-                    Intent intent = new Intent(ForSale.this, Shelf.class);
+                    Intent intent = new Intent(SearchBook.this, Shelf.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (item.getItemId() == R.id.nav_interests) {
-                    Intent intent = new Intent(ForSale.this, Interests.class);
+                    Intent intent = new Intent(SearchBook.this, Interests.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (item.getItemId() == R.id.nav_finances) {
-                    Intent intent = new Intent(ForSale.this, Finances.class);
+                    Intent intent = new Intent(SearchBook.this, Finances.class);
                     startActivity(intent);
                     overridePendingTransition(0, 0);
                     return true;
@@ -90,15 +89,13 @@ public class ForSale extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        for_sale_RecyclerView = findViewById(R.id.for_sale_recycler_view);
-        for_sale_RecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        bookRecyclerView = findViewById(R.id.book_recycler_view);
 
-        // Passando o listener de clique para o adaptador
-        bookAdapter = new BookAdapter(new ArrayList<>(), 3, this::openEditBook, this::deleteBook);
-        for_sale_RecyclerView.setAdapter(bookAdapter);
+        bookRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         loadBooks();
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
         //verifying if the current user is logged in
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
@@ -117,11 +114,11 @@ public class ForSale extends AppCompatActivity {
                                         resizeImageView(accountIcon, 48, 48);
                                         setImageViewMargin(accountIcon, 14);
 
-                                        Glide.with(ForSale.this)
+                                        Glide.with(SearchBook.this)
                                                 .load(imageUrl)
                                                 .transform(
                                                         new CircleCrop(),
-                                                        new CircularBorderTransformation(ForSale.this, 1, Color.parseColor("#91918E"))
+                                                        new CircularBorderTransformation(SearchBook.this, 1, Color.parseColor("#91918E"))
                                                 )
                                                 .into(accountIcon);
                                     }
@@ -133,7 +130,79 @@ public class ForSale extends AppCompatActivity {
                             Toast.makeText(this, "Error retrieving data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
+            EditText searchBar = findViewById(R.id.search_bar);
+            searchBar.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    filterBooks(s.toString());
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                }
+            });
         }
+
+        bookAdapter = new BookAdapter(new ArrayList<>(), 0, null, null);
+        bookRecyclerView.setAdapter(bookAdapter);
+
+        // Obtendo o texto do Intent
+        Intent intent = getIntent();
+        String searchQuery = intent.getStringExtra("search_query");
+
+        if (searchQuery != null && !searchQuery.isEmpty()) {
+            // Use o texto para realizar a busca inicial
+            filterBooks(searchQuery);
+
+            // Opcional: Exibir o texto na barra de busca
+            EditText searchBar = findViewById(R.id.search_bar);
+            searchBar.setText(searchQuery);
+        }
+    }
+
+    private void filterBooks(String query) {
+        String currentUser = mAuth.getCurrentUser().getUid();
+
+        // Evita crash se o adaptador não estiver inicializado
+        if (bookAdapter == null) {
+            Toast.makeText(this, "Adapter is not initialized", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Busca no Firestore
+        db.collection("books")
+                .whereNotEqualTo("userId", currentUser)
+                .whereEqualTo("readingStatus", "want_to_sell")
+                .whereGreaterThanOrEqualTo("title", query) // Filtrar títulos maiores ou iguais à consulta
+                .whereLessThanOrEqualTo("title", query + "\uf8ff") // Filtrar títulos menores ou iguais ao intervalo
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<Book> filteredBooks = new ArrayList<>();
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                        Book book = documentSnapshot.toObject(Book.class);
+                        book.setId(documentSnapshot.getId());
+                        filteredBooks.add(book);
+                    }
+
+                    if (!filteredBooks.isEmpty()) {
+                        updateRecyclerView(filteredBooks);
+                    } else {
+                        Toast.makeText(SearchBook.this, "No books found for the query.", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(SearchBook.this, "Error filtering books: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("Catalog", "Error filtering books", e);
+                });
+    }
+
+    private void updateRecyclerView(List<Book> books) {
+        bookAdapter.updateBookList(books);
     }
 
     private void resizeImageView(ImageView imageView, int widthDp, int heightDp) {
@@ -181,33 +250,48 @@ public class ForSale extends AppCompatActivity {
 
     private void loadBooks() {
         startProgressBar();
+        String currentUser = mAuth.getCurrentUser().getUid();
+
         db.collection("books")
-                .whereEqualTo("userId", mAuth.getCurrentUser().getUid())
+                .whereNotEqualTo("userId", currentUser)
                 .whereEqualTo("readingStatus", "want_to_sell")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    // Converte os documentos em objetos Book e atribui o id manualmente
                     List<Book> bookList = new ArrayList<>();
-                    for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                         Book book = documentSnapshot.toObject(Book.class);
-                        if (book != null) {
-                            book.setId(documentSnapshot.getId()); // Define o ID do livro
-                            bookList.add(book);
+                        book.setId(documentSnapshot.getId()); // Aqui estamos atribuindo o ID do documento
+                        bookList.add(book);
+                    }
+
+                    // Configura o LayoutManager e o Adaptador
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+                    bookRecyclerView.setLayoutManager(layoutManager);
+                    bookAdapter = new BookAdapter(bookList, 0, new BookAdapter.OnBookClickListener() {
+                        @Override
+                        public void onBookClick(int position) {
+
                         }
-                    }
 
-                    // Verificar se a lista foi preenchida corretamente
-                    if (bookList.isEmpty()) {
-                        Log.d("Shelf", "No books found for this user.");
-                    } else {
-                        Log.d("Shelf", "Loaded " + bookList.size() + " books.");
-                    }
+                        public void onBookClick(Book book) {
+                            // Não faz nada, pode ser vazio
+                        }
+                    }, new BookAdapter.OnBookDeleteListener() {
+                        @Override
+                        public void onBookDelete(String bookId) {
 
-                    // Atualiza a lista de livros no adaptador existente
-                    bookAdapter.updateBookList(bookList);
-                    finishProgressBar();
+                        }
+
+                        public void onBookDelete(Book book) {
+                            // Não faz nada, pode ser vazio
+                        }
+                    });
+                    bookRecyclerView.setAdapter(bookAdapter);
+                    bookRecyclerView.postDelayed(this::finishProgressBar, 250);
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(ForSale.this, "Error loading books", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchBook.this, "Error loading books", Toast.LENGTH_SHORT).show();
                     Log.e("Shelf", "Error loading books: ", e);
                 });
     }
@@ -220,74 +304,5 @@ public class ForSale extends AppCompatActivity {
     public void openCatalog(View view) {
         Intent myIntent = new Intent(getApplicationContext(), Catalog.class);
         startActivity(myIntent);
-    }
-
-    public void openEditBook(int position) {
-        if (bookList == null) {
-            Log.e("Shelf", "bookList é nula");
-        } else if (bookList.isEmpty()) {
-            Log.e("Shelf", "bookList está vazia");
-        } else {
-            Log.d("Shelf", "bookList contém " + bookList.size() + " livros");
-        }
-
-        if (bookList != null && !bookList.isEmpty()) {
-            // Obter o livro pela posição
-            Book book = bookList.get(position);
-
-            // Pegue o ID do livro para passá-lo para a EditBook
-            String bookId = book.getId(); // Suponha que o livro tenha o ID
-
-            // Passar o ID do livro para a próxima Activity (EditBook)
-            Intent myIntent = new Intent(getApplicationContext(), EditBook.class);
-            myIntent.putExtra("BOOK_ID", bookId); // Passando o bookId para EditBook
-            startActivity(myIntent);
-        } else {
-            Log.e("Shelf", "Não foi possível acessar o livro na posição: " + position);
-        }
-    }
-
-
-    // Método para excluir o livro
-    private void deleteBook(String bookId) {
-        if (bookId != null && !bookId.isEmpty()) {
-            db.collection("books").document(bookId)
-                    .delete()
-                    .addOnSuccessListener(aVoid -> {
-                        // Remover a imagem do Firebase Storage, se necessário
-                        deleteBookImageFromStorage(bookId);
-
-                        Toast.makeText(ForSale.this, "Book deleted successfully", Toast.LENGTH_SHORT).show();
-                        // Atualize a lista de livros após exclusão
-                        loadBooks();  // Recarrega os livros após a exclusão
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(ForSale.this, "Error deleting book", Toast.LENGTH_SHORT).show();
-                    });
-        } else {
-            Toast.makeText(this, "Invalid book ID", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    // Método para excluir a imagem do livro do Firebase Storage (caso tenha sido carregada)
-    private void deleteBookImageFromStorage(String bookId) {
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference();
-        StorageReference imageRef = storageRef.child("book_images/" + bookId + ".jpg");
-
-        imageRef.delete()
-                .addOnSuccessListener(aVoid -> Log.d("DeleteBook", "Image deleted successfully"))
-                .addOnFailureListener(e -> Log.e("DeleteBook", "Error deleting image", e));
-    }
-
-    public void openSearch(View view) {
-        // Obtendo o texto do EditText
-        EditText searchBar = findViewById(R.id.search_bar);
-        String searchText = searchBar.getText().toString().trim();
-
-        // Criando o Intent e passando o texto como extra
-        Intent myIntent = new Intent(getApplicationContext(), SearchBook.class);
-        myIntent.putExtra("search_query", searchText); // Envia o texto para a próxima Activity
-        startActivity(myIntent);
-        overridePendingTransition(0, 0);
     }
 }

@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -301,5 +302,17 @@ public class Shelf extends AppCompatActivity {
         StorageReference imageRef = storageRef.child("book_images/" + bookId + ".jpg");
 
         imageRef.delete();
+    }
+
+    public void openSearch(View view) {
+        // Obtendo o texto do EditText
+        EditText searchBar = findViewById(R.id.search_bar);
+        String searchText = searchBar.getText().toString().trim();
+
+        // Criando o Intent e passando o texto como extra
+        Intent myIntent = new Intent(getApplicationContext(), SearchBook.class);
+        myIntent.putExtra("search_query", searchText); // Envia o texto para a próxima Activity
+        startActivity(myIntent);
+        overridePendingTransition(0, 0);
     }
 }

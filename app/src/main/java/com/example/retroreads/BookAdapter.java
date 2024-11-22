@@ -147,6 +147,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             holder.bookPrice.setText(String.valueOf(book.getPrice()));
         }
 
+        if (holder.bookQuantity != null) {
+            holder.bookQuantity.setText(String.valueOf(book.getQuantity()));
+        }
+
         if (holder.bookStarRate != null) {
             holder.bookStarRate.setText(String.valueOf(book.getStarRate()));
         }
@@ -299,7 +303,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     public static class BookViewHolder extends RecyclerView.ViewHolder {
-        TextView bookTitle, bookAuthor, bookPrice, bookReadingStatus, bookStarRate, ownerName, ownerPhone, interestedPeople;
+        TextView bookTitle, bookAuthor, bookPrice, bookReadingStatus, bookStarRate, ownerName, ownerPhone, interestedPeople, bookQuantity;
         ImageView bookCover;
         Button interestButton;
         Button deleteInterestButton;
@@ -314,6 +318,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             bookTitle = itemView.findViewById(R.id.book_title);
             bookAuthor = itemView.findViewById(R.id.book_author);
             bookPrice = itemView.findViewById(R.id.book_price);
+            bookQuantity = itemView.findViewById(R.id.stock_number);
             bookReadingStatus = itemView.findViewById(R.id.book_reading_status);
             bookCover = itemView.findViewById(R.id.book_cover);
             bookStarRate = itemView.findViewById(R.id.book_star_rate);

@@ -49,6 +49,8 @@
 
     <string name="finances">Finances</string>
 
+    <string name="search_results">Search results</string>
+
     <string name="add_book">Add new book</string>
     <string name="edit_book">Edit book details</string>
     <string name="book_cover">Book cover</string>
@@ -103,6 +105,7 @@
     <string name="interest_button">Interested!</string>
     <string name="delete_interest_button">Delete interest</string>
     <string name="interested_people"> are interested</string>
+    <string name="book_stock"> in stock</string>
 
     <string name="stock_value">Stock value</string>
     <string name="cash_flow">Current cash flow</string>

@@ -12,11 +12,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -286,4 +284,15 @@ public class Finances extends AppCompatActivity {
         startActivity(myIntent);
     }
 
+    public void openSearch(View view) {
+        // Obtendo o texto do EditText
+        EditText searchBar = findViewById(R.id.search_bar);
+        String searchText = searchBar.getText().toString().trim();
+
+        // Criando o Intent e passando o texto como extra
+        Intent myIntent = new Intent(getApplicationContext(), SearchBook.class);
+        myIntent.putExtra("search_query", searchText); // Envia o texto para a próxima Activity
+        startActivity(myIntent);
+        overridePendingTransition(0, 0);
+    }
 }

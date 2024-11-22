@@ -28,6 +28,7 @@
         android:padding="10dp"
         android:hint="@string/search"
         android:inputType="text"
+        android:onClick="openSearch"
         android:background="@drawable/scroll_view"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

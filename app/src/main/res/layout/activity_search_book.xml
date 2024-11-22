@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ForSale"
+    tools:context=".SearchBook"
     android:background="@color/white">
 
     <ImageView
@@ -16,8 +16,7 @@
         android:onClick="openCatalog"
         android:src="@drawable/retro_reads_logo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck"/>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
         android:id="@+id/search_bar"
@@ -29,7 +28,6 @@
         android:hint="@string/search"
         android:inputType="text"
         android:background="@drawable/scroll_view"
-        android:onClick="openSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:drawableEnd="@drawable/search"
@@ -47,10 +45,10 @@
         tools:ignore="SpeakableTextPresentCheck"/>
 
     <TextView
-        android:id="@+id/for_sale_title"
+        android:id="@+id/catalog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/for_sale"
+        android:text="@string/search_results"
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,16 +56,31 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="75dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/for_sale_recycler_view"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="484dp"
         android:layout_marginHorizontal="20dp"
-        android:background="@drawable/scroll_view"
-        android:padding="6dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/for_sale_title"/>
+        app:layout_constraintTop_toBottomOf="@+id/catalog_title"
+        tools:ignore="NotSibling,SpeakableTextPresentCheck">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/book_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/scroll_view"
+                android:padding="6dp"
+                tools:ignore="MissingConstraints"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

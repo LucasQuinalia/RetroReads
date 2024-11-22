@@ -29,6 +29,7 @@
         android:hint="@string/search"
         android:inputType="text"
         android:background="@drawable/scroll_view"
+        android:onClick="openSearch"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:drawableEnd="@drawable/search"
