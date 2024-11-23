@@ -5,6 +5,354 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OpenBook">
+    tools:context=".OpenBook"
+    android:background="@color/white">
 
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:onClick="openCatalog"
+        android:src="@drawable/retro_reads_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"/>
+
+    <EditText
+        android:id="@+id/search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginHorizontal="75dp"
+        android:padding="10dp"
+        android:hint="@string/search"
+        android:inputType="text"
+        android:background="@drawable/scroll_view"
+        android:onClick="openSearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:drawableEnd="@drawable/search"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+    <ImageView
+        android:id="@+id/account"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:onClick="openAccount"
+        android:src="@drawable/account"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck"/>
+
+    <TextView
+        android:id="@+id/add_book_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/book_details"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="75dp"/>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/add_book_title"
+        app:layout_constraintTop_toBottomOf="@+id/add_book_title"
+        tools:ignore="NotSibling,SpeakableTextPresentCheck"
+        android:background="@drawable/scroll_view"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/book_cover_sub_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_cover"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+            <ImageButton
+                android:id="@+id/add_book_placeholder"
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/book_image"
+                android:scaleType="fitXY"
+                tools:ignore="SpeakableTextPresentCheck"/>
+
+            <TextView
+                android:id="@+id/book_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_title"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_title_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_title_hint"
+                android:padding="10dp"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+            <TextView
+                android:id="@+id/book_author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_author"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_author_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_author_hint"
+                android:padding="10dp"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+            <TextView
+                android:id="@+id/book_publisher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_publisher"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_publisher_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_publisher_hint"
+                android:padding="10dp"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+            <TextView
+                android:id="@+id/book_release_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_release_date"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_release_date_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_release_date_hint"
+                android:padding="10dp"
+                android:inputType="number"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+            <TextView
+                android:id="@+id/book_genre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_genre"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <Spinner
+                android:id="@+id/book_genre_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:padding="10dp"
+                style="@style/CustomSpinnerStyle"/>
+
+            <TextView
+                android:id="@+id/book_page_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_page_number"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_page_number_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_page_number_hint"
+                android:padding="10dp"
+                android:inputType="number"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+            <TextView
+                android:id="@+id/book_isbn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_isbn"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_isbn_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_isbn_hint"
+                android:padding="10dp"
+                android:inputType="number"
+                android:maxLength="17"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+            <TextView
+                android:id="@+id/book_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_description"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_description_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:gravity="start"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_description_hint"
+                android:padding="10dp"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+            <TextView
+                android:id="@+id/book_star_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_star_rate"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_star_rate_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_star_rate_hint"
+                android:padding="10dp"
+                android:inputType="numberDecimal"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+            <TextView
+                android:id="@+id/book_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_price"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_price_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_price_hint"
+                android:padding="10dp"
+                android:inputType="numberDecimal"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+
+            <TextView
+                android:id="@+id/book_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/book_quantity"
+                android:textSize="18sp"
+                android:layout_marginTop="25dp"/>
+
+            <EditText
+                android:id="@+id/book_quantity_field"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/input_field"
+                android:hint="@string/book_quantity_hint"
+                android:padding="10dp"
+                android:inputType="number"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/interest_button"
+        style="@style/CustomButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:text="@string/interest_button"
+        android:textStyle="bold"
+        android:textColor="@color/button_text_selector"
+        android:textSize="24sp"
+        android:background="@drawable/button_background_selector"
+        android:layout_marginTop="25dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintStart_toStartOf="@id/scrollView"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="250dp"
+            android:layout_height="75dp"
+            app:itemIconSize="22dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="35dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/rounded_background"
+            app:itemBackground="@drawable/nav_item_background_selector"
+            app:itemIconTint="@drawable/nav_item_icon_color"
+            app:labelVisibilityMode="unlabeled"
+            app:menu="@menu/bottom_nav_menu"/>
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/progress_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/semi_transparent_white"
+            android:layout_marginBottom="100dp"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:indeterminateTint="@color/green"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

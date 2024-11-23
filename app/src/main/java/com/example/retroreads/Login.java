@@ -99,25 +99,25 @@ public class Login extends AppCompatActivity {
 
         // Verifica se os campos estão preenchidos
         if (email.isEmpty()) {
-            Toast.makeText(this, "Por favor, insira o e-mail.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please, fill in the field with your email.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (password.isEmpty()) {
-            Toast.makeText(this, "Por favor, insira a senha.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "PPlease, fill in the field with your password.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Login bem-sucedido", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), Catalog.class);
                         startActivity(intent);
                         finishProgressBar();
                         finish();
                     } else {
-                        Toast.makeText(this, "Erro ao fazer login: " + task.getException().getMessage(),
+                        Toast.makeText(this, "Error logging in: " + task.getException().getMessage(),
                                 Toast.LENGTH_SHORT).show();
                     }
                 });

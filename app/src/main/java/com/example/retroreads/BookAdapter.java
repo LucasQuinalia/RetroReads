@@ -1,6 +1,8 @@
 package com.example.retroreads;
 
 import android.content.Context;
+import android.content.Intent;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,6 +91,18 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             }
         });
 
+        // Condicional para permitir o clique apenas nos layouts 'interested' e 'catalog'
+        if (viewType == TYPE_INTERESTED || viewType == TYPE_CATALOG) {
+            holder.bookCover.setOnClickListener(v -> {
+                Intent intent = new Intent(context, OpenBook.class);
+                intent.putExtra("BOOK_ID", book.getId()); // Envia o ID do livro para a OpenBook Activity
+                intent.putExtra("BOOK_USER_ID", book.getUserId()); // Envia o userId do dono
+                context.startActivity(intent);
+            });
+        } else {
+            holder.bookCover.setOnClickListener(null); // Remove o clique em outros tipos de layout
+        }
+
         String bookId = book.getId();
         Glide.with(context)
                 .load(book.getImageUrl())
@@ -117,7 +131,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             });
         }
 
-
         if (holder.ownerName != null || holder.ownerPhone != null) {
             // Obtenha o ID do proprietário do livro
             String ownerId = book.getUserId();
@@ -139,7 +152,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
                         });
             } else {
-                Toast.makeText(context, "Este é o seu livro!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "This book is yours!", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -227,11 +240,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
                             });
                 } else {
-                    Toast.makeText(context, "Este é o seu livro!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "This book is yours!", Toast.LENGTH_SHORT).show();
                 }
             });
         }
-
 
         if (holder.deleteInterestButton != null) {
             holder.deleteInterestButton.setOnClickListener(v -> deleteInterest(bookId, mAuth.getUid(), context));

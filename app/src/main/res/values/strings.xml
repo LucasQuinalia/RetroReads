@@ -53,6 +53,7 @@
 
     <string name="add_book">Add new book</string>
     <string name="edit_book">Edit book details</string>
+    <string name="book_details">Book details</string>
     <string name="book_cover">Book cover</string>
     <string name="book_title">Title</string>
     <string name="book_title_hint">Book title</string>
