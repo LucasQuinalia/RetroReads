@@ -272,6 +272,9 @@
                 android:background="@drawable/input_field"
                 android:hint="@string/state_hint"
                 android:padding="10dp"
+                android:inputType="text"
+                android:maxLength="2"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"/>
 
             <TextView

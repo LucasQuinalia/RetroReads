@@ -8,7 +8,9 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
@@ -84,6 +86,155 @@ public class Register extends AppCompatActivity {
 
         //listener for the book image
         userPicPlaceholder.setOnClickListener(v -> openImagePicker());
+
+        EditText stateField = findViewById(R.id.state_field);
+
+        stateField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() > 2) {
+                    stateField.setError("Apenas 2 caracteres são permitidos!");
+                    s.delete(2, s.length()); // Remove caracteres excedentes
+                }
+            }
+        });
+
+        EditText cepField = findViewById(R.id.cep_field);
+
+        cepField.addTextChangedListener(new TextWatcher() {
+            private boolean isUpdating = false;
+            private final String mask = "#####-###";
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isUpdating) {
+                    isUpdating = false;
+                    return;
+                }
+
+                String unmasked = s.toString().replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
+
+                StringBuilder masked = new StringBuilder();
+                int i = 0;
+
+                for (char m : mask.toCharArray()) {
+                    if (m != '#' && unmasked.length() > i) {
+                        masked.append(m);
+                    } else if (i < unmasked.length()) {
+                        masked.append(unmasked.charAt(i));
+                        i++;
+                    }
+                }
+
+                isUpdating = true;
+                cepField.setText(masked.toString());
+                cepField.setSelection(masked.length()); // Move o cursor para o final
+            }
+        });
+
+        EditText phoneField = findViewById(R.id.phone_number_field);
+
+        phoneField.addTextChangedListener(new TextWatcher() {
+            private boolean isUpdating = false;
+            private final String maskWithDDD = "(##) #####-####";
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isUpdating) {
+                    isUpdating = false;
+                    return;
+                }
+
+                String unmasked = s.toString().replaceAll("[^\\d]", ""); // Remove caracteres não numéricos
+
+                // Limita a quantidade de números a 11 (com DDD)
+                if (unmasked.length() > 11) {
+                    unmasked = unmasked.substring(0, 11);
+                }
+
+                // Aplica a máscara ao número
+                StringBuilder masked = new StringBuilder();
+                int i = 0;
+
+                // Aplica a máscara (##) #####-####
+                for (char m : maskWithDDD.toCharArray()) {
+                    if (m != '#' && i < unmasked.length()) {
+                        masked.append(m);
+                    } else if (i < unmasked.length()) {
+                        masked.append(unmasked.charAt(i));
+                        i++;
+                    }
+                }
+
+                // Atualiza o campo com a máscara formatada
+                isUpdating = true;
+                phoneField.setText(masked.toString());
+                phoneField.setSelection(masked.length()); // Move o cursor para o final
+            }
+        });
+
+        EditText cpfField = findViewById(R.id.cpf_field);
+
+        cpfField.addTextChangedListener(new TextWatcher() {
+            private boolean isUpdating = false;
+            private final String cpfMask = "###.###.###-##";  // Formato CPF
+            private final String cnpjMask = "##.###.###/####-##";  // Formato CNPJ
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (isUpdating) {
+                    isUpdating = false;
+                    return;
+                }
+
+                String unmasked = s.toString().replaceAll("[^\\d]", ""); // Remove todos os caracteres não numéricos
+
+                // Verifica se é CPF ou CNPJ, e aplica a máscara apropriada
+                String mask = unmasked.length() <= 11 ? cpfMask : cnpjMask;
+
+                StringBuilder masked = new StringBuilder();
+                int i = 0;
+
+                // Aplica a máscara no número
+                for (char m : mask.toCharArray()) {
+                    if (m != '#' && i < unmasked.length()) {
+                        masked.append(m);
+                    } else if (i < unmasked.length()) {
+                        masked.append(unmasked.charAt(i));
+                        i++;
+                    }
+                }
+
+                // Atualiza o campo com a máscara formatada
+                isUpdating = true;
+                cpfField.setText(masked.toString());
+                cpfField.setSelection(masked.length()); // Move o cursor para o final
+            }
+        });
     }
 
     private void startProgressBar() {
