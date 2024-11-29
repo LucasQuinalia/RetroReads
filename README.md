@@ -42,7 +42,7 @@
 
 ###
 
-<p align="left">Java, Firebase, Android Studio, Figma and Notion</p>
+<p align="left">Java, Firebase, Android Studio, Figma, Notion and Git</p>
 
 ###
 
