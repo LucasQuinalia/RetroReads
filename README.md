@@ -28,7 +28,7 @@ Ao integrar diferentes tipos de usuários, o CSCO promove um ambiente colaborati
 ## Funcionalidades
 
 - **Login e Cadastro:** Os usuários podem se registrar e fazer login no sistema, garantindo que suas ações sejam realizadas em suas contas. Cada usuário tem acesso a uma página personalizada com seus próprios livros cadastrados.
-- 
+  
 - **CRUD para cadastro de livros**;
 
 - **Catálogo dos livros (Home)**;
