@@ -44,32 +44,25 @@ Ao integrar diferentes tipos de usuários, o CSCO promove um ambiente colaborati
 - **Conexão com Firebase:** utilizamos o armazenamento em nuvem do firebase como Database NoSQL, assim como utilizamos o firebase para autenticação de usuários.
 
 ## Screenshots
-Home (Catálogo), BookPage (página do produto) e Meus Interesses
+
+Catálogo (Catalog)
 <div align="center">
-  <img src="./gifs-images/gif1.gif" alt="Demo GIF" height="360" />
+  <img src="./images/1.jpg" alt="Demo" height="360" />
 </div>
 
 -----------------
 
-Login
+Estante (Shelf)
 <div align="center">
-  <img src="./gifs-images/gif2.gif" alt="Demo GIF" height="360" />
+  <img src="./images/2.jpg" alt="Demo" height="360" />
 </div>
 
 ----------------
 
-Minha Estante, Visualização e Deleção de livros
+Finanças (Finances)
 <div align="center">
-  <img src="./gifs-images/gif3.gif" alt="Demo GIF" height="360" />
+  <img src="./images/3.jpg" alt="Demo" height="360" />
 </div>
-
---------------
-
-Cadastro de Livros e Visualização
-<div align="center">
-  <img src="./gifs-images/gif4.gif" alt="Demo GIF" height="360" />
-</div>
-
 
 ## Tecnologias (Stacks)
 <div align="left">
