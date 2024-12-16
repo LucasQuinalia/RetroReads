@@ -12,11 +12,8 @@
 3. [Screenshots](#screenshots) 
 4. [Tecnologias (Stacks)](#tecnologias) 
 5. [Instalação](#como-usar) 
-	- [Requisitos](#requisitos) 
-	 - [Passos de instalação](#passos-de-instalação) 
-	 - [Inicialização](#inicialização) 
-7. [Licença](#licença)
-8. [Autores](#autores)
+6. [Licença](#licença)
+7. [Autores](#autores)
 
 ## Sobre o Projeto
 Sistema CSCO - Conexão Sebo-Consumidor Online é um sistema desenvolvido para conectar leitores, livrarias e sebos, facilitando a venda, compra e gerenciamento de livros de maneira eficiente e intuitiva. Este projeto tem como objetivo principal oferecer uma solução completa para problemas gerenciais de negócios, ao mesmo tempo em que auxilia usuários comuns a organizarem suas estantes de livros de forma prática e funcional.<br><br>O sistema abrange desde o gerenciamento de estoque e planejamento financeiro para livrarias e sebos, até funcionalidades que permitem aos leitores acompanhar suas leituras, fazer reservas de livros e explorar novas histórias. Dessa forma, o CSCO oferece uma plataforma robusta, acessível e de alta funcionalidade, atendendo às necessidades tanto de negócios de venda de livros quanto de leitores entusiastas.
