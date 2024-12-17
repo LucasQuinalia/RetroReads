@@ -95,7 +95,7 @@ For sale (À venda) e Finanças (Finances)
 
 | Propriedade            | Valor                                |
 | ---------------------- | ------------------------------------- |
-| Tamanho                | 12,114 KB (cerca de 12 MB)           |
+| Tamanho                | 12,113 KB (cerca de 12 MB)           |
 | Formato                | `.apk`                               |
 | Compatibilidade        | Android 8.0 Oreo ou superior         |
 
