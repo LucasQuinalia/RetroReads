@@ -11,8 +11,8 @@
 2. [Funcionalidades](#funcionalidades) 
 3. [Screenshots](#screenshots) 
 4. [Tecnologias (Stacks)](#tecnologias-stacks) 
-5. [Instalação](#tecnologias-stacks) 
-6. [Licença](#tecnologias-stacks) 
+5. [Instalação](#instalação) 
+6. [Licença](#licença) 
 7. [Autores](#autores)
 
 ## Sobre o Projeto
@@ -82,10 +82,58 @@ For sale (À venda) e Finanças (Finances)
 <p align="left">Java, Firebase, Android Studio, Figma, Notion and Git</p>
 
 ## Instalação
+
 ### Requisitos
-| Sistema Operacional   | Recommended |
-| --------------------- | ----------- |
-| Android               | 8.0 Oreo    |
+
+| Requisito              | Especificação                         |
+| ---------------------- | ------------------------------------- |
+| Sistema Operacional    | Android 8.0 Oreo ou superior         |
+| Armazenamento Livre    | 13 MB ou mais                        |
+| Conexão com Internet   | Necessária para autenticação e sincronização |
+
+### Informações sobre o APK
+
+| Propriedade            | Valor                                |
+| ---------------------- | ------------------------------------- |
+| Tamanho                | 12,114 KB (cerca de 12 MB)           |
+| Formato                | `.apk`                               |
+| Compatibilidade        | Android 8.0 Oreo ou superior         |
+
+### Para Desenvolvedores
+
+| Requisito              | Especificação                         |
+| ---------------------- | ------------------------------------- |
+| Sistema Operacional    | Windows 10, macOS 11 ou Linux         |
+| Android Studio         | Arctic Fox (ou versão posterior)      |
+| JDK (Java Development Kit) | JDK 8 ou superior                  |
+| Gradle                 | Configurado automaticamente pelo projeto |
+| Dispositivo de Teste   | Emulador ou dispositivo físico com Android 8.0 ou superior |
+
+### Passos para Instalar Localmente
+
+1. **Clone o repositório**:
+   ```bash
+   git clone https://github.com/LucasQuinalia/RetroReads.git
+   
+2. **Abra o projeto no Android Studio:**
+
+    No menu do Android Studio, clique em File > Open e selecione o diretório do projeto.
+
+3. **Baixe as dependências:**
+
+    O Gradle irá baixar automaticamente as dependências ao abrir o projeto.
+
+4. **Configure o Firebase:**
+
+    Adicione o arquivo google-services.json na pasta app para habilitar os serviços do Firebase.
+
+5. **Conecte um dispositivo Android:**
+
+    Use um dispositivo físico ou configure um emulador no Android Studio.
+
+6. **Execute o projeto:**
+
+    Clique no botão Run no Android Studio ou pressione Shift + F10.
 
 ## Licença
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
