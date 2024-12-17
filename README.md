@@ -45,23 +45,23 @@ Ao integrar diferentes tipos de usuários, o CSCO promove um ambiente colaborati
 
 ## Screenshots
 
-Catálogo (Catalog)
+Catálogo (Catalog) e Resultados da busca (Search results)
 <div align="center">
-  <img src="./images/1.jpg" alt="Demo" height="360" />
+  <img src="./app/images/1.gif" alt="Demo" height="360" />
 </div>
 
 -----------------
 
-Estante (Shelf)
+Interesses (Interests) e Estante (Shelf)
 <div align="center">
-  <img src="./images/2.jpg" alt="Demo" height="360" />
+  <img src="./app/images/2.gif" alt="Demo" height="360" />
 </div>
 
 ----------------
 
-Finanças (Finances)
+For sale (À venda) e Finanças (Finances)
 <div align="center">
-  <img src="./images/3.jpg" alt="Demo" height="360" />
+  <img src="./app/images/3.gif" alt="Demo" height="360" />
 </div>
 
 ## Tecnologias (Stacks)
