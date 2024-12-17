@@ -11,8 +11,8 @@
 2. [Funcionalidades](#funcionalidades) 
 3. [Screenshots](#screenshots) 
 4. [Tecnologias (Stacks)](#tecnologias-stacks) 
-5. [Instalação](#instalacao) 
-6. [Licença](#licenca)
+5. [Instalação](#tecnologias-stacks) 
+6. [Licença](#tecnologias-stacks) 
 7. [Autores](#autores)
 
 ## Sobre o Projeto
@@ -47,21 +47,21 @@ Ao integrar diferentes tipos de usuários, o CSCO promove um ambiente colaborati
 
 Catálogo (Catalog) e Resultados da busca (Search results)
 <div align="center">
-  <img src="./app/images/1.gif" alt="Demo" height="360" />
+  <img src="./app/images/1.gif" alt="Demo" height="440" />
 </div>
 
 -----------------
 
 Interesses (Interests) e Estante (Shelf)
 <div align="center">
-  <img src="./app/images/2.gif" alt="Demo" height="360" />
+  <img src="./app/images/2.gif" alt="Demo" height="440" />
 </div>
 
 ----------------
 
 For sale (À venda) e Finanças (Finances)
 <div align="center">
-  <img src="./app/images/3.gif" alt="Demo" height="360" />
+  <img src="./app/images/3.gif" alt="Demo" height="440" />
 </div>
 
 ## Tecnologias (Stacks)
