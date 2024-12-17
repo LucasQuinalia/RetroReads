@@ -10,9 +10,9 @@
 1. [Sobre o Projeto](#sobre-o-projeto) 
 2. [Funcionalidades](#funcionalidades) 
 3. [Screenshots](#screenshots) 
-4. [Tecnologias (Stacks)](#tecnologias) 
-5. [Instalação](#como-usar) 
-6. [Licença](#licença)
+4. [Tecnologias (Stacks)](#tecnologias-stacks) 
+5. [Instalação](#instalacao) 
+6. [Licença](#licenca)
 7. [Autores](#autores)
 
 ## Sobre o Projeto
